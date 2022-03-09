@@ -2,9 +2,11 @@
 
 namespace lab_1
 {
-    public class PersonProperties
+    public class PersonProperties : IEquatable <PersonProperties>
     {
+        public string Ects { get; set; }
         private string _firstName;
+
         public string FirstName
         {
             get
@@ -42,6 +44,28 @@ namespace lab_1
             }
         }
 
+        public override string ToString()
+        {
+            return $"Name: {_firstName}";
+        }
+
+        public override bool Equals(object obj)
+        {
+            return obj is PersonProperties properties &&
+                   Ects == properties.Ects &&
+                   FirstName == properties.FirstName;
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(Ects, FirstName);
+        }
+
+        public bool Equals(PersonProperties other)
+        {
+            return other._firstName.Equals(_firstName) && other.Ects == Ects;
+        }
+
 
 
     }
@@ -59,7 +83,7 @@ namespace lab_1
     
     
 
-    public class Money
+    public class Money : IComparable<Money>
     {
         private readonly decimal _value;
 
@@ -97,7 +121,13 @@ namespace lab_1
                 
             }
         }
-
+        
+        public static Money ParseValue(string valueStr, Currency currency)
+        {
+            decimal value = Convert.ToDecimal(valueStr);
+            return new Money(value, currency);
+        }
+        
         // money * 4 -> *(money, 4)
         public static Money operator *(Money money, decimal factor)
         {
@@ -109,8 +139,65 @@ namespace lab_1
             return Money.Of(money.Value * factor, money.Currency);
         }
 
+        public static bool operator >(Money a, Money b)
+        {
+            IsCurrencyDifferent(a, b);
+            
+            return a.Value > b.Value;
+            
+        }
+
+        public static bool operator <(Money a, Money b)
+        {
+            IsCurrencyDifferent(a, b);
+
+            return a.Value < b.Value;
 
 
+        }
+
+        private static void IsCurrencyDifferent(Money a, Money b)
+        {
+            if (a.Currency != b.Currency)
+            {
+                throw new ArgumentException("Different currencies!");
+            }
+        }
+
+        public static implicit operator decimal(Money money)
+        {
+            return money.Value;
+        }
+
+        public static explicit operator double(Money money)
+        {
+            return (double)money.Value;
+        }
+
+        public static explicit operator string(Money money)
+        {
+            
+            return $"{money.Value} {money.Currency}";
+        }
+
+        public override string ToString()
+        {
+            return $"Value: {_value}, Currency: {_currency}";
+        }
+
+        public int CompareTo(Money? other)
+        {
+            int currencyCon = Currency.CompareTo(other.Currency);
+            if(currencyCon == 0)
+            {
+                return Value.CompareTo(other.Value);
+
+            }
+            else
+            {
+                return currencyCon;
+            }
+        }
     }
 
 
@@ -122,11 +209,48 @@ namespace lab_1
 
             PersonProperties person = PersonProperties.OfName("Artgygy");
             Console.WriteLine(person.FirstName == null ? "NULL":"PERSON");
-            Money? money = Money.Of(13, Currency.USD) ?? Money.Of(0, Currency.USD);
-            Money result = money * 4;
 
-            Console.WriteLine(money.Value);
-            Console.WriteLine(result.Value);
+            Object obj = person;
+            IEquatable<PersonProperties> ie = person;
+
+            Money? money = Money.Of(13, Currency.PLN) ?? Money.Of(0, Currency.PLN);
+            Money result = 5 * money;
+            Console.WriteLine(person);
+            Console.WriteLine("Money value " + money.Value);
+            Console.WriteLine("Money value * 5" + result.Value);
+            Console.WriteLine("Is bigger than 5 pln? {0}",money < Money.Of(5, Currency.PLN));
+
+            int c = 5;
+            long d = 11111111111L;
+            d = c; // rzutowanie niejawne
+            c = (int) d; // rzutowanie jawne
+
+            decimal cost = money;
+            double price = (double) money;
+            string str = (string)money;
+            Console.WriteLine("Money value (rzutowanie) " + price);
+            Console.WriteLine("Money value (rzutowanie na string) " + str);
+
+
+            Money[] prices =
+            {
+                Money.Of(10, Currency.PLN),
+                Money.Of(32, Currency.EUR),
+                Money.Of(41, Currency.PLN),
+                Money.Of(15, Currency.USD),
+                Money.Of(33, Currency.USD),
+                Money.Of(21, Currency.PLN),
+                Money.Of(95, Currency.EUR)
+
+            };
+
+            Array.Sort(prices);
+            Console.WriteLine("Sorted currencies list:");
+            foreach(var p in prices)
+            {
+                Console.WriteLine((string)p);
+            }
+
         }
     }
 }
