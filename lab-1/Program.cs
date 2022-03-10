@@ -25,7 +25,7 @@ namespace lab_1
                 }
             }
         }
-        //s
+        
 
         private PersonProperties(string name)
         {
@@ -198,6 +198,48 @@ namespace lab_1
             {
                 return currencyCon;
             }
+        }
+    }
+
+    public class Water
+    {
+        private int _level { get; set; }
+        public int Capacity { get; set; }
+
+        public void refuel(int amount)
+        {
+            if(amount < 0)
+            {
+                throw new ArgumentException("Amount cannot be a negative number.");
+            }
+
+            if(this._level + amount > this.Capacity)
+            {
+                throw new ArgumentException("Amount is too large.");
+            }
+            this._level += amount;
+
+        }
+
+        public bool refuel(Water source, int amount)
+        {
+            if(amount < 0)
+            {
+                throw new ArgumentException("Amount cannot be a negative number.");
+            }
+            if(source._level + amount > source.Capacity)
+            {
+                throw new ArgumentException("Amount is too large.");
+            }
+            if(this._level < amount)
+            {
+                throw new ArgumentException("Amount is too large.");
+            }
+
+            this._level -= amount;
+            source._level += amount;
+            return true;
+
         }
     }
 
