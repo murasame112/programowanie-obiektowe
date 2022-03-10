@@ -25,6 +25,7 @@ namespace lab_1
                 }
             }
         }
+        //s
 
         private PersonProperties(string name)
         {
