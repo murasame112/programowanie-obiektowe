@@ -210,6 +210,21 @@ namespace lab_1
         }
     }
 
+    public static class MoneyExtension
+    {
+        public static Money ToCurrency(this Money money, Currency currency, decimal course)
+        {
+            if (money.Currency == currency)
+            {
+                return Money.Of(money.Value, currency);
+            }
+            else
+            {
+                return Money.Of(money.Value / course, currency);
+            }
+        }
+    }
+
     public class Water
     {
         private int _level { get; set; }
@@ -394,6 +409,13 @@ namespace lab_1
             {
                 Console.WriteLine((string)s);
             }
+            Console.WriteLine();
+
+            var exchangeResult = money.ToCurrency(Currency.EUR, 4.1m);
+            Console.WriteLine("Your money in EUR: {0}", exchangeResult.Value);
+
+            exchangeResult = exchangeResult.ToCurrency(Currency.EUR, 100m);
+            Console.WriteLine("After converting from EUR to EUR {0}", exchangeResult.Value);
 
         }
     }
