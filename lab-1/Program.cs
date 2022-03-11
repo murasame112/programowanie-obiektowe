@@ -140,6 +140,15 @@ namespace lab_1
             return Money.Of(money.Value * factor, money.Currency);
         }
 
+        public static Money operator +(Money a, Money b)
+        {
+            if(a.Currency != b.Currency)
+            {
+                throw new ArgumentException("Different currencies.");
+            }
+            return Money.Of((a.Value + b.Value), a.Currency);
+        }
+
         public static bool operator >(Money a, Money b)
         {
             IsCurrencyDifferent(a, b);
@@ -206,6 +215,21 @@ namespace lab_1
         private int _level { get; set; }
         public int Capacity { get; set; }
 
+        public bool consume(int amount)
+        {
+            if (amount < 0)
+            {
+                return false;
+            }
+
+            if (this._level + amount > this.Capacity)
+            {
+                return false;
+            }
+            this._level -= amount;
+            return true;
+        }
+
         public void refuel(int amount)
         {
             if(amount < 0)
@@ -240,6 +264,61 @@ namespace lab_1
             source._level += amount;
             return true;
 
+        }
+    }
+
+    public class Student : IComparable<Student>
+    {
+
+        public string Name { get; set; }
+        public string Surname { get; set; }
+        public double Average { get; set; }
+
+        private Student(string name, string surname, double average)
+        {
+            Name = name;
+            Surname = surname;
+            Average = average;
+        }
+
+        public static Student? CreateStudent(string name, string surname, double average)
+        {
+            return average < 0 ? null : new Student(name, surname, average);
+        }
+
+
+        
+        public int CompareTo(Student other)
+        {
+            int averageCom = Average.CompareTo(other.Average);
+            if (averageCom == 0)
+            {
+                int surnameCom = Surname.CompareTo(other.Surname);
+                if(surnameCom == 0)
+                {
+                    return Name.CompareTo(other.Name);
+                }
+                else
+                {
+                    return surnameCom;
+                }
+
+            }
+            else
+            {
+                return averageCom;
+            }
+        }
+
+        public static explicit operator string(Student student)
+        {
+
+            return $"{student.Name} {student.Surname} {student.Average}";
+        }
+
+        public override string ToString()
+        {
+            return $"{Name} {Surname} {Average}";
         }
     }
 
@@ -292,6 +371,28 @@ namespace lab_1
             foreach(var p in prices)
             {
                 Console.WriteLine((string)p);
+            }
+
+            Console.WriteLine();
+
+
+            Student[] students =
+            {
+                Student.CreateStudent("Jan","Kowalski", 3.0),
+                Student.CreateStudent("Arkadiusz","Nowak", 3.5),
+                Student.CreateStudent("Łukasz","Felis", 2.0),
+                Student.CreateStudent("Adam","Małysz", 2.0),
+                Student.CreateStudent("Natalia","Nowak", 5.0),
+                Student.CreateStudent("Robert","Kubica", 4.0),
+                
+
+            };
+
+            Array.Sort(students);
+            Console.WriteLine("Sorted students list:");
+            foreach (var s in students)
+            {
+                Console.WriteLine((string)s);
             }
 
         }
