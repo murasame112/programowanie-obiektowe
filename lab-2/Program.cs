@@ -172,6 +172,47 @@ namespace lab_2
         }
     }
 
+    public abstract class Vehicle
+    {
+        public double Weight { get; init; }
+        public int MaxSpeed { get; init; }
+        protected int _mileage;
+        public int Mealeage
+        {
+            get { return _mileage; }
+        }
+        public abstract decimal Drive(int distance);
+        public override string ToString()
+        {
+            return $"Vehicle{{ Weight: {Weight}, MaxSpeed: {MaxSpeed}, Mileage: {_mileage} }}";
+        }
+    }
+
+    public abstract class Scooter : Vehicle
+    {
+
+    }
+
+    public class ElectricScooter : Scooter
+    {
+        public int BatteriesLevel { get; init; }
+        public int MaxRange = 100;
+
+        public void ChargeBatteries()
+        {
+
+        }
+        public override decimal Drive(int distance)
+        {
+           
+        }
+    }
+
+    public class KickScooter : Scooter
+    {
+
+    }
+
     class Program
     {
         static void Main(string[] args)
@@ -219,6 +260,8 @@ namespace lab_2
             {
                 Console.WriteLine(iterator.GetNext());
             }
+
+
         }
     }
 }
