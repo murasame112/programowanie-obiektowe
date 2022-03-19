@@ -66,6 +66,14 @@ namespace lab_2
 
     }
 
+    class Wasp : IFly
+    {
+        public void Fly()
+        {
+
+        }
+    }
+
     interface IEngine
     {
 
@@ -128,6 +136,58 @@ namespace lab_2
             return aggregate.names.Length > index;
         }
     }
+
+    class ArrayIntAggregate : IAggregate
+    {
+        internal int[] array = {1, 2, 3, 4, 5};
+
+
+
+        
+        public IIterator createIterator()
+        {
+            return new ArrayIntIterator(this);
+        }
+        
+    }
+
+    class ArrayIntIterator: IIterator
+    {
+
+        private int _index = 0;
+        private int _indexReverse = 0;
+       
+        private ArrayIntAggregate _aggregate;
+        
+        public ArrayIntIterator(ArrayIntAggregate aggregate)
+        {
+            this._aggregate = aggregate;
+            _indexReverse = _aggregate.array.Length - 1;
+        }
+        
+        public string GetNext()
+        {
+            throw new Exception();
+        }
+
+        public int GetNextInt()
+        {
+            return _aggregate.array[_index++];
+        }
+
+        public int ReverseIterator()
+        {
+            
+            _index++;
+            return _aggregate.array[_indexReverse--];
+        }
+
+        public bool HasNext()
+        {
+            return _aggregate.array.Length > _index;
+        }
+    }
+
 
     class SimpleAggregate : IAggregate
     {
@@ -195,22 +255,32 @@ namespace lab_2
 
     public class ElectricScooter : Scooter
     {
-        public int BatteriesLevel { get; init; }
+        public int BatteriesLevel { get; set; }
         public int MaxRange = 100;
 
         public void ChargeBatteries()
         {
-
+            BatteriesLevel= 100;
         }
         public override decimal Drive(int distance)
         {
-           
+            if(distance <= BatteriesLevel)
+            { 
+            _mileage+=distance;
+            BatteriesLevel-=distance;
+            return (decimal) (distance / (double) MaxSpeed);
+            }
+
+            return -1;
         }
     }
 
     public class KickScooter : Scooter
     {
-
+        public override decimal Drive(int distance)
+        {
+            return -1;
+        }
     }
 
     class Program
@@ -243,8 +313,17 @@ namespace lab_2
             IFly[] flyingObjects = new IFly[3];
             flyingObjects[0] = new Duck();
             flyingObjects[1] = new Hydroplane();
+            flyingObjects[2] = new Wasp();
 
             ISwim swimming = flyingObjects[0] as ISwim;
+            int swimCounter = 0;
+            foreach(IFly s in flyingObjects)
+            {
+                ISwim amISwimming = s as ISwim;
+                swimCounter += amISwimming == null ? 0 : 1;
+            }
+            Console.WriteLine();
+            Console.WriteLine($"Swimming objects in array: {swimCounter}");
 
             string[] names = { "Adam", "Ewa", "Karol" };
 
@@ -260,6 +339,21 @@ namespace lab_2
             {
                 Console.WriteLine(iterator.GetNext());
             }
+            Console.WriteLine();
+
+            
+            aggregate = new ArrayIntAggregate();
+            ArrayIntIterator intIterator = (ArrayIntIterator)aggregate.createIterator();
+            
+
+            Console.WriteLine();
+            Console.WriteLine("Cw 3:");
+
+            while (intIterator.HasNext())
+            {
+                Console.WriteLine(intIterator.ReverseIterator());
+            }
+            
 
 
         }
