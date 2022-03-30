@@ -109,7 +109,7 @@ class Exercise2
                 }
             }
         }
-
+        // sprawdzam czy jest w bezposrednim sasiedztwie ten punkt 1
         // sprawdzam ktore z wspolrzednych wieksze i ktore mniejsze (lub takie same) i na podstawie tego "składam" kierunek
     }
 }
