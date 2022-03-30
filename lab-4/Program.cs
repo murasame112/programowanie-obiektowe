@@ -12,6 +12,13 @@ namespace lab_4
         E = 30,
         F = 20
     }
+
+    record Student(string Name, int Ects, bool Egzam);
+
+    class ClassStudent
+    {
+
+    }
     class Program
     {
         static void Main(string[] args)
@@ -38,6 +45,37 @@ namespace lab_4
                 Degree.C or Degree.D => 4.0,
                 _ => 3.0
             };
+
+            Student student = new Student("Karol", 12, true);
+            Console.WriteLine(student);
+            if(student == new Student("Karol", 12, true))
+            {
+                Console.WriteLine("identyczni");
+            }
+            else
+            {
+                Console.WriteLine("rozni");
+            }
+
+            Student[] students =
+            {
+                new Student("Karol", 12, true),
+                new Student("Ewa", 17, false),
+                new Student("Robert", 18, true),
+                new Student("Ania", 15, false)
+            };
+
+            foreach(Student st in students)
+            {
+                Console.WriteLine(
+                    st.Name +
+                    st switch
+                    {
+                        { Ects: >= 17, Egzam: true } => " Zaliczone",
+                        _ => " Niezaliczone"
+                    }
+                    );
+            }
         }
     }
 }

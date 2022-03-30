@@ -52,7 +52,8 @@ class Exercise1
             Direction4.UP => (resultPoint.Item1, resultPoint.Item2 - 1),
             Direction4.RIGHT => (resultPoint.Item1 + 1, resultPoint.Item2),
             Direction4.DOWN => (resultPoint.Item1, resultPoint.Item2 + 1),
-            Direction4.LEFT => (resultPoint.Item1 - 1, resultPoint.Item2)
+            Direction4.LEFT => (resultPoint.Item1 - 1, resultPoint.Item2),
+            _ => (resultPoint.Item1, resultPoint.Item2)
         };
 
         if((resultPoint.Item1 > screenSize.Item1) || (resultPoint.Item2 > screenSize.Item2))
@@ -97,7 +98,19 @@ class Exercise2
 
     public static Direction8 DirectionTo(int[,] screen, (int, int) point, int value)
     {
-        throw new NotImplementedException();
+        (int, int) placeOfPixel;
+        for(int i = 0; i < 2; i++)
+        {
+            for(int j = 0; j < 2; j++)
+            {
+                if(screen[i,j] == value)
+                {
+                    placeOfPixel = (i, j);
+                }
+            }
+        }
+
+        // sprawdzam ktore z wspolrzednych wieksze i ktore mniejsze (lub takie same) i na podstawie tego "składam" kierunek
     }
 }
 
