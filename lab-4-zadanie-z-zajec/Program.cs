@@ -98,7 +98,9 @@ class Exercise2
 
     public static Direction8 DirectionTo(int[,] screen, (int, int) point, int value)
     {
-        (int, int) placeOfPixel;
+        int x = 0;
+        int y = 0;
+        (int, int) placeOfPixel = (0, 0);
         for(int i = 0; i < 2; i++)
         {
             for(int j = 0; j < 2; j++)
@@ -106,9 +108,79 @@ class Exercise2
                 if(screen[i,j] == value)
                 {
                     placeOfPixel = (i, j);
+                    x = placeOfPixel.Item1;
+                    y = placeOfPixel.Item2;
                 }
             }
         }
+        /*
+        Tutaj próbowałem wyrażeniem switch, ale musi do tego być użyta stała, więc cały czas wyświetlało mi błąd :(
+        int pointX = point.Item1;
+        int pointY = point.Item2;
+        
+
+        int xDirection = x switch
+        {
+            < pointX => 0,
+            pointX => 1,
+            > pointX => 2
+        };
+
+        int yDirection = placeOfPixel switch
+        {
+            placeOfPixel.Item2 < point.Item2 => 0, //w lewo
+            placeOfPixel.Item2 == point.Item2 => 1,
+            placeOfPixel.Item2 > point.Item2 => 2
+        };
+        */
+        int xDirection;
+        if (x < point.Item1)
+        {
+            xDirection = 0;
+        }
+        else if(x == point.Item1)
+        {
+            xDirection = 1;
+        }
+        else
+        {
+            xDirection = 2;
+        }
+
+
+        int yDirection;
+        if (y < point.Item1)
+        {
+            yDirection = 0;
+        }
+        else if (y == point.Item1)
+        {
+            yDirection = 1;
+        }
+        else
+        {
+            yDirection = 2;
+        }
+
+        (int, int) directionTuple = (xDirection, yDirection);
+        if (directionTuple == (1,1))
+        {
+            throw new Exception("point is on the same place as value");
+        }
+        Direction8 direction = directionTuple switch
+        {
+            (0,0) => Direction8.UP_LEFT,
+            (0,1) => Direction8.UP,
+            (0,2) => Direction8.UP_RIGHT,
+            (1,0) => Direction8.LEFT,
+            (1,2) => Direction8.RIGHT,
+            (2,0) => Direction8.DOWN_LEFT,
+            (2,1) => Direction8.DOWN,
+            (2,2) => Direction8.DOWN_RIGHT
+            
+        };
+
+        return direction;
         // sprawdzam czy jest w bezposrednim sasiedztwie ten punkt 1
         // sprawdzam ktore z wspolrzednych wieksze i ktore mniejsze (lub takie same) i na podstawie tego "składam" kierunek
     }
@@ -135,7 +207,26 @@ class Exercise3
 {
     public static int CarCounter(Car[] cars)
     {
-        throw new NotImplementedException();
+        int biggestCounter = 0;
+        int actualCounter = 0;
+        foreach (Car car in cars)
+        {
+            foreach(Car car2 in cars)
+            {
+                if(car == car2)
+                {
+                    actualCounter++;
+                }
+
+            }
+            if(actualCounter > biggestCounter)
+            {
+                biggestCounter = actualCounter;
+            }
+            actualCounter = 0;
+        }
+
+        return biggestCounter;
     }
 }
 
