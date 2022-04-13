@@ -15,9 +15,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "lab-4", "lab-4\lab-4.csproj
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "lab-4-zadanie-z-zajec", "lab-4-zadanie-z-zajec\lab-4-zadanie-z-zajec.csproj", "{3A66A31D-87BA-432A-95E8-5E578A4C35E0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "lab5", "lab5\lab5.csproj", "{820DB854-6E94-4C88-AFB3-77EC681E2054}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "lab5", "lab5\lab5.csproj", "{820DB854-6E94-4C88-AFB3-77EC681E2054}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "lab-5-zadanie-z-zajec", "lab-5-zadanie-z-zajec\lab-5-zadanie-z-zajec.csproj", "{500B963F-3CF6-4836-842B-A35A0050602A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "lab-5-zadanie-z-zajec", "lab-5-zadanie-z-zajec\lab-5-zadanie-z-zajec.csproj", "{500B963F-3CF6-4836-842B-A35A0050602A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "lab-6", "lab-6\lab-6.csproj", "{D56866C7-6750-4A42-807A-672986B14703}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -57,6 +59,10 @@ Global
 		{500B963F-3CF6-4836-842B-A35A0050602A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{500B963F-3CF6-4836-842B-A35A0050602A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{500B963F-3CF6-4836-842B-A35A0050602A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D56866C7-6750-4A42-807A-672986B14703}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D56866C7-6750-4A42-807A-672986B14703}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D56866C7-6750-4A42-807A-672986B14703}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D56866C7-6750-4A42-807A-672986B14703}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
