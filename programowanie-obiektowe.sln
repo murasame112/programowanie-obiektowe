@@ -21,9 +21,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "lab-5-zadanie-z-zajec", "la
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "lab-6", "lab-6\lab-6.csproj", "{D56866C7-6750-4A42-807A-672986B14703}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "lab-7", "lab-7\lab-7.csproj", "{E7B8C3C6-6D40-4B05-BA75-135AC5E23C0F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "lab-7", "lab-7\lab-7.csproj", "{E7B8C3C6-6D40-4B05-BA75-135AC5E23C0F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "lab-7-zadanie-z-zajec", "lab-7-zadanie-z-zajec\lab-7-zadanie-z-zajec.csproj", "{50635D21-F1F0-45D2-8E4C-C98F5B905406}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "lab-7-zadanie-z-zajec", "lab-7-zadanie-z-zajec\lab-7-zadanie-z-zajec.csproj", "{50635D21-F1F0-45D2-8E4C-C98F5B905406}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "lab-8", "lab-8\lab-8.csproj", "{61200489-E891-4291-96FE-E12119309AA9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -75,6 +77,10 @@ Global
 		{50635D21-F1F0-45D2-8E4C-C98F5B905406}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{50635D21-F1F0-45D2-8E4C-C98F5B905406}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{50635D21-F1F0-45D2-8E4C-C98F5B905406}.Release|Any CPU.Build.0 = Release|Any CPU
+		{61200489-E891-4291-96FE-E12119309AA9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61200489-E891-4291-96FE-E12119309AA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61200489-E891-4291-96FE-E12119309AA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61200489-E891-4291-96FE-E12119309AA9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
