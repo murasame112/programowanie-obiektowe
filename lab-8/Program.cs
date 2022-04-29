@@ -127,6 +127,7 @@ namespace lab_8
             int size = 3;
             List<Student> pageStudent = students.Skip(page * size).Take(size).ToList();
             Console.WriteLine(string.Join(", ", pageStudent));
+            
 
 
         }
