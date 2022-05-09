@@ -98,6 +98,7 @@ namespace lab_8
                 group s by str into groupItem
                 select (groupItem.Key, groupItem.Count());
 
+            Console.WriteLine("-----");
             Console.WriteLine(string.Join(", ", strCounters));
 
             evenNumbers = ints.Where(i => i % 2 == 0).Select(i => i + 2);
